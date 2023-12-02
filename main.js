@@ -11,6 +11,33 @@ async function fetchGitHubData(username) {
 
 // Render statistics
 function renderStats(stats) {
+    const formatMostProductiveTimeOfDay = (hour) => {
+        const timeOfDay = hour < 12 ? 'Morning' : (hour < 18 ? 'Afternoon' : 'Evening');
+        return `${timeOfDay} (${hour % 12 || 12}:00 - ${(hour % 12) + 1}:00)`;
+    };
+
+    const formatDayOfWeek = (day) => {
+        const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        return daysOfWeek[day];
+    };
+
+    const formatMonthSeason = (month) => {
+        const months = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+
+        const seasons = {
+            'Winter': [11, 0, 1],
+            'Spring': [2, 3, 4],
+            'Summer': [5, 6, 7],
+            'Autumn': [8, 9, 10]
+        };
+
+        const season = Object.entries(seasons).find(([season, monthsInSeason]) => monthsInSeason.includes(month))[0];
+
+        return `${months[month]} (${season})`;
+    };
+    
     return `
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
             <div class="p-4 bg-red-600 text-white rounded">
@@ -47,15 +74,15 @@ function renderStats(stats) {
             </div>
             <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Time of the Day</h2>
-                <p class="text-3xl font-bold">${stats.mostProductiveTimeOfDay}</p>
+                <p class="text-3xl font-bold">${formatMostProductiveTimeOfDay(stats.mostProductiveTimeOfDay)}</p>
             </div>
             <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Day of the Week</h2>
-                <p class="text-3xl font-bold">${stats.mostProductiveDayOfWeek}</p>
+                <p class="text-3xl font-bold">${formatDayOfWeek(stats.mostProductiveDayOfWeek)}</p>
             </div>
             <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Month/Season</h2>
-                <p class="text-3xl font-bold">${stats.mostProductiveMonthSeason}</p>
+                <p class="text-3xl font-bold">${formatMonthSeason(stats.mostProductiveMonthSeason)}</p>
             </div>
         </div>
     `;
