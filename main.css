@@ -1,0 +1,43 @@
+body {
+  background-color: #fdfffc; /* Light yellow for a cheerful vibe */
+  font-family: "Comic Sans MS", cursive, sans-serif; /* Embrace the Comic Sans for craziness! */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.new-year-theme {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.new-year-text {
+  font-size: 32px;
+  font-weight: bold;
+  color: #d62828; /* Reddish for excitement */
+}
+
+.new-year-graphic {
+  max-width: 100%;
+  height: 100px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animated-spin {
+  animation: spin 5s linear infinite;
+}
+
+.crazy-bg {
+  background-image: url("crazy-background.jpg"); /* Replace with your crazy background image */
+  background-size: cover;
+  color: #1d3557; /* Dark blue for text visibility on the crazy background */
+}
