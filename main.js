@@ -94,12 +94,6 @@ async function renderYearInReview() {
     const username = inputElement.value.trim();
 
     if (username === '') {
-        // If username is empty, show a welcoming message in the initial card
-        const initialCardContent = `
-            <h1 class="text-3xl font-bold mb-4 text-pink-600">Welcome to GitHub Year in Review!</h1>
-            <p>Enter your GitHub username to see your crazy year in review stats!</p>
-        `;
-        document.getElementById('app').innerHTML = initialCardContent;
         return;
     }
 
@@ -200,5 +194,6 @@ async function renderYearInReview() {
     document.getElementById('app').innerHTML = htmlContent;
 }
 
-// Event listener
-document.getElementById('githubUsername').addEventListener('change', renderYearInReview);
+// Event listener for the submit button
+document.getElementById('submitBtn').addEventListener('click', renderYearInReview);
+
