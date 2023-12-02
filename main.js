@@ -22,40 +22,40 @@ function renderStats(stats) {
                 <p class="text-3xl font-bold">${stats.reposInYear}</p>
             </div>
             <div class="p-4 bg-red-600 text-white rounded">
+                <h2 class="text-lg font-semibold mb-2">Most Starred Repository</h2>
+                <p class="text-3xl font-bold">${stats.mostStarredRepo}</p>
+            </div>
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Languages Used</h2>
                 <p class="text-3xl font-bold">${stats.languages}</p>
             </div>
-            <div class="p-4 bg-green-800 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Used Language</h2>
                 <p class="text-3xl font-bold">${stats.mostUsedLanguage}</p>
             </div>
-            <div class="p-4 bg-red-600 text-white rounded">
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">First Language Used</h2>
                 <p class="text-3xl font-bold">${stats.firstLanguageUsed}</p>
             </div>
-            <div class="p-4 bg-green-800 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">External Repos Contributed To</h2>
                 <p class="text-3xl font-bold">${stats.externalReposContributedTo}</p>
             </div>
-            <div class="p-4 bg-red-600 text-white rounded">
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Longest Streak (Days)</h2>
                 <p class="text-3xl font-bold">${stats.longestStreak}</p>
             </div>
-            <div class="p-4 bg-green-800 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Time of the Day</h2>
                 <p class="text-3xl font-bold">${stats.mostProductiveTimeOfDay}</p>
             </div>
-            <div class="p-4 bg-red-600 text-white rounded">
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Day of the Week</h2>
                 <p class="text-3xl font-bold">${stats.mostProductiveDayOfWeek}</p>
             </div>
-            <div class="p-4 bg-green-800 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Month/Season</h2>
                 <p class="text-3xl font-bold">${stats.mostProductiveMonthSeason}</p>
-            </div>
-            <div class="p-4 bg-red-600 text-white rounded">
-                <h2 class="text-lg font-semibold mb-2">Most Starred Repository</h2>
-                <p class="text-3xl font-bold">${stats.mostStarredRepo}</p>
             </div>
         </div>
     `;
@@ -110,11 +110,41 @@ async function renderYearInReview() {
     const longestStreak = currentYearRepos.length > 0 ?
         Math.max(...currentYearRepos.map(repo => new Date(repo.pushed_at).getTime())) : 0;
 
-    const mostProductiveTimeOfDay = 'Night Coder'; // Assuming night is more productive
-    const mostProductiveDayOfWeek = 'Monday'; // Assuming Monday is the most productive day
-    const mostProductiveMonthSeason = 'Spring'; // Assuming Spring is the most productive season
+    // Most Productive Time of the Day Calculation
+    const productiveTimeOfDay = currentYearRepos.reduce((acc, repo) => {
+        const hour = new Date(repo.created_at).getHours();
+        acc[hour] = (acc[hour] || 0) + 1;
+        return acc;
+    }, {});
 
-    const mostStarredRepo = repositories.reduce((max, repo) => {
+    const mostProductiveTimeOfDay = Object.entries(productiveTimeOfDay).reduce((max, [hour, count]) => {
+        return count > max.count ? { hour, count } : max;
+    }, { hour: '', count: 0 }).hour;
+
+    // Most Productive Day of the Week Calculation
+    const productiveDayOfWeek = currentYearRepos.reduce((acc, repo) => {
+        const dayOfWeek = new Date(repo.created_at).getDay();
+        acc[dayOfWeek] = (acc[dayOfWeek] || 0) + 1;
+        return acc;
+    }, {});
+
+    const mostProductiveDayOfWeek = Object.entries(productiveDayOfWeek).reduce((max, [day, count]) => {
+        return count > max.count ? { day, count } : max;
+    }, { day: '', count: 0 }).day;
+
+    // Most Productive Month/Season Calculation
+    const productiveMonthSeason = currentYearRepos.reduce((acc, repo) => {
+        const month = new Date(repo.created_at).getMonth();
+        acc[month] = (acc[month] || 0) + 1;
+        return acc;
+    }, {});
+
+    const mostProductiveMonthSeason = Object.entries(productiveMonthSeason).reduce((max, [month, count]) => {
+        return count > max.count ? { month, count } : max;
+    }, { month: '', count: 0 }).month;
+
+    // Most Starred Repository Calculation
+    const mostStarredRepo = currentYearRepos.reduce((max, repo) => {
         return repo.stargazers_count > max.stars ? { name: repo.name, stars: repo.stargazers_count } : max;
     }, { name: '', stars: 0 }).name;
 
