@@ -13,47 +13,47 @@ async function fetchGitHubData(username) {
 function renderStats(stats) {
     return `
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Total Repositories</h2>
                 <p class="text-3xl font-bold">${stats.total}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Repositories in ${stats.year}</h2>
                 <p class="text-3xl font-bold">${stats.reposInYear}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Languages Used</h2>
                 <p class="text-3xl font-bold">${stats.languages}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Used Language</h2>
                 <p class="text-3xl font-bold">${stats.mostUsedLanguage}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">First Language Used</h2>
                 <p class="text-3xl font-bold">${stats.firstLanguageUsed}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">External Repos Contributed To</h2>
                 <p class="text-3xl font-bold">${stats.externalReposContributedTo}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Longest Streak (Days)</h2>
                 <p class="text-3xl font-bold">${stats.longestStreak}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Time of the Day</h2>
                 <p class="text-3xl font-bold">${stats.mostProductiveTimeOfDay}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Day of the Week</h2>
                 <p class="text-3xl font-bold">${stats.mostProductiveDayOfWeek}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-green-800 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Productive Month/Season</h2>
                 <p class="text-3xl font-bold">${stats.mostProductiveMonthSeason}</p>
             </div>
-            <div class="p-4 bg-purple-500 text-white rounded">
+            <div class="p-4 bg-red-600 text-white rounded">
                 <h2 class="text-lg font-semibold mb-2">Most Starred Repository</h2>
                 <p class="text-3xl font-bold">${stats.mostStarredRepo}</p>
             </div>
