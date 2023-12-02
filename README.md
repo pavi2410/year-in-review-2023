@@ -1,6 +1,7 @@
 # GitHub Year in Review 2023 🎉
 
-![GitHub Year in Review 2024](link-to-image)
+![GitHub Year in Review 2023](https://github.com/pavi2410/year-in-review-2023/assets/28837746/1a62a78c-5838-4745-96da-6a137c3f37d4)
+
 
 Welcome to GitHub Year in Review! This simple web app allows you to view your GitHub activity for the year 2024 in a creative and fun way.
 
